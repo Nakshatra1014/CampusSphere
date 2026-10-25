@@ -1,0 +1,44 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Java / Maven
+**/target/
+**/logs/
+
+# Node / React
+**/node_modules/
+**/dist/
+
+# IDE and operating system
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local configuration and logs
+*.log
+
+# Downloaded Maven distribution and local tools
+apache-maven-*-bin.zip
+tools/apache-maven-*/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Local database files
+backend/data/
+*.db
+*.db-shm
+*.db-wal
+
+# User uploads and resumes
+backend/uploads/
+
+# Generated Vite files
+frontend/*.timestamp-*.mjs
