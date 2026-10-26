@@ -22,15 +22,19 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     @Query("SELECT r FROM Ride r WHERE r.id = :id")
     Optional<Ride> findByIdWithLock(@Param("id") Long id);
 
+    
     @Query("SELECT r FROM Ride r WHERE r.status = :status AND " +
-           "(:startLocation IS NULL OR LOWER(r.startLocation) LIKE LOWER(CONCAT('%', :startLocation, '%'))) AND " +
-           "(:destination IS NULL OR LOWER(r.destination) LIKE LOWER(CONCAT('%', :destination, '%'))) AND " +
-           "(:rideDate IS NULL OR r.rideDate = :rideDate) " +
-           "ORDER BY r.rideDate ASC, r.rideTime ASC")
-    List<Ride> searchRides(
-            @Param("status") RideStatus status,
-            @Param("startLocation") String startLocation,
-            @Param("destination") String destination,
-            @Param("rideDate") LocalDate rideDate
-    );
+       "(r.rideDate > CURRENT_DATE OR " +
+       "(r.rideDate = CURRENT_DATE AND r.rideTime > CURRENT_TIME)) AND " +
+       "(:startLocation IS NULL OR LOWER(r.startLocation) LIKE LOWER(CONCAT('%', :startLocation, '%'))) AND " +
+       "(:destination IS NULL OR LOWER(r.destination) LIKE LOWER(CONCAT('%', :destination, '%'))) AND " +
+       "(:rideDate IS NULL OR r.rideDate = :rideDate) " +
+       "ORDER BY r.rideDate ASC, r.rideTime ASC")
+        List<Ride> searchRides(
+        @Param("status") RideStatus status,
+        @Param("startLocation") String startLocation,
+        @Param("destination") String destination,
+        @Param("rideDate") LocalDate rideDate
+);
+
 }
