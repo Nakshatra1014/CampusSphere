@@ -61,8 +61,8 @@ export const rideService = {
     return res.data;
   },
 
-  getMyBookings: async () => {
-    const res = await api.get('/rides/my-bookings');
-    return res.data;
+  getMyBookedRides: async () => {
+  const res = await api.get('/rides/my-bookings');
+  return res.data;
   },
 };

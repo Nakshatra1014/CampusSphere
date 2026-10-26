@@ -52,10 +52,11 @@ export default function ReportItemPage() {
     try {
       setError('');
       setLoading(true);
-      await lostFoundService.reportItem(formData);
-      showToast(`${formData.type === 'LOST' ? 'Lost item reported' : 'Found item logged'} successfully!`, 'success');
-      navigate('/lost-found');
-    } catch (err) {
+      await lostFoundService.reportItem({
+      ...formData,
+      itemType: formData.type,
+      type: undefined,
+      }); catch (err) {
       setError(err.message || 'Failed to submit report.');
     } finally {
       setLoading(false);

@@ -87,10 +87,16 @@ export default function RoommateProfilePage() {
       setError('');
       setSaving(true);
       await roommateService.saveProfile({
-        ...formData,
-        budgetMin: Number(formData.budgetMin),
-        budgetMax: Number(formData.budgetMax),
-      });
+      preferredLocation: formData.preferredLocation,
+      budgetRange: `${Number(formData.budgetMin)} - ${Number(formData.budgetMax)}`,
+      occupancyPreference: formData.occupancyType,
+      lifestyle: formData.cleanliness,
+      studyHabits: formData.sleepHabits,
+      foodPreference: formData.dietaryPreference,
+      sleepSchedule: formData.sleepHabits,
+      interests: formData.lifestyleNotes,
+      bio: formData.lifestyleNotes,
+    });
       showToast('Roommate preferences saved and active!', 'success');
       navigate('/roommates');
     } catch (err) {
