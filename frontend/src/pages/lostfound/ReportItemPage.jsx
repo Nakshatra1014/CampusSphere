@@ -49,19 +49,24 @@ export default function ReportItemPage() {
       return;
     }
 
+    
     try {
       setError('');
       setLoading(true);
+
       await lostFoundService.reportItem({
-      ...formData,
-      itemType: formData.type,
-      type: undefined,
-      }); catch (err) {
+        ...formData,
+        itemType: formData.type,
+        type: undefined,
+      });
+
+    } catch (err) {
       setError(err.message || 'Failed to submit report.');
-    } finally {
+        } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <Box>
